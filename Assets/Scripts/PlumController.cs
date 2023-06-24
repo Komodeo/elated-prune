@@ -37,6 +37,7 @@ public class PlumController : MonoBehaviour
         ApplyGravity();
 
         rb.velocity = vel;
+        rb.transform.position = new Vector3(rb.transform.position.x, rb.transform.position.y, -19);
     }
 
     private void Controller()
@@ -45,14 +46,14 @@ public class PlumController : MonoBehaviour
         {
             readyToJump = false;
 
-            jump();
+            Jump();
         }
 
         else if (Input.GetKeyDown(KeyCode.Space) && !autoJump && readyToJump)
         {
             readyToJump = false;
 
-            jump();
+            Jump();
         }
 
         else if (inWater)
@@ -61,7 +62,7 @@ public class PlumController : MonoBehaviour
         }
     }
 
-    private void jump()
+    private void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 

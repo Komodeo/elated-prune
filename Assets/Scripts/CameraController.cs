@@ -16,6 +16,6 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         // Camera follows player (plum)
-        transform.position = new Vector3(plum.transform.position.x, plum.transform.position.y, 25);
+        transform.position = new Vector3(plum.transform.position.x, plum.transform.position.y, -25);
     }
 }
