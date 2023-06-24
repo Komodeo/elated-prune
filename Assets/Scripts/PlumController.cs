@@ -42,14 +42,14 @@ public class PlumController : MonoBehaviour
 
     private void Controller()
     {
-        if (Input.GetKey(KeyCode.Space) && autoJump && readyToJump)
+        if (Input.GetKey(KeyCode.Space) && autoJump && readyToJump && onGround)
         {
             readyToJump = false;
 
             Jump();
         }
 
-        else if (Input.GetKeyDown(KeyCode.Space) && !autoJump && readyToJump)
+        else if (Input.GetKeyDown(KeyCode.Space) && !autoJump && readyToJump && onGround)
         {
             readyToJump = false;
 
