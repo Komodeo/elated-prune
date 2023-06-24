@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlumController : MonoBehaviour
 {
@@ -16,9 +17,13 @@ public class PlumController : MonoBehaviour
     public float shrunkScale;
     public float inflatedScale;
     public bool released = false;
+    public float XSpeedLimit;
+    public float YSpeedLimit;
     private Vector3 vel;
     public Rigidbody rb;
     public Transform global;
+
+    public TMP_Text text;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +36,13 @@ public class PlumController : MonoBehaviour
     void Update()
     {
         Controller();
+        SpeedControl();
+        UI();
+    }
+
+    private void UI()
+    {
+        text.text = "x velocity = " + vel.x + "\ny velocity = " + vel.y;
     }
 
     private void FixedUpdate()
@@ -121,7 +133,7 @@ public class PlumController : MonoBehaviour
 
     private void ApplyGravity()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && marioJump)
         {
             vel.y -= marioJumpGravity * Time.deltaTime;
         }
@@ -130,6 +142,25 @@ public class PlumController : MonoBehaviour
         {
             vel.y -= normalGravity * Time.deltaTime;
         }
+    }
+
+    private void SpeedControl()
+    {
+        if (vel.x > XSpeedLimit)
+        {
+            vel.x = XSpeedLimit;
+        }
+
+        else if (vel.y > YSpeedLimit)
+        {
+            vel.x = YSpeedLimit;
+        }
+
+        else if (vel.y < -YSpeedLimit)
+        {
+            vel.x = -YSpeedLimit;
+        }
+
     }
 
     private void Shrink()
