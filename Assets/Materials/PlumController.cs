@@ -10,10 +10,10 @@ public class PlumController : MonoBehaviour
     public bool onGround;
     public float slopeLimit;
     public bool inWater = false;
-    ///public bool marioJump = false;
-    ///public float normalGravity;
-    ///public float marioJumpGravity;
-    ///private Vector3 vel;
+    public bool marioJump = false;
+    public float normalGravity;
+    public float marioJumpGravity;
+    private Vector3 vel;
     public Rigidbody rb;
     public Transform global;
 
@@ -30,12 +30,14 @@ public class PlumController : MonoBehaviour
         Controller();
     }
 
-    ///private void FixedUpdate()
-    ///{
-        ///rb.velocity = vel;
+    private void FixedUpdate()
+    {
+        vel = rb.velocity;
 
-        ///ApplyGravity();
-    ///}
+        ApplyGravity();
+
+        rb.velocity = vel;
+    }
 
     private void Controller()
     {
@@ -85,8 +87,16 @@ public class PlumController : MonoBehaviour
         readyToJump = true;
     }
 
-    ///private void ApplyGravity()
-    ///{
-        ///vel.y -= normalGravity * Time.deltaTime;
-    ///}
+    private void ApplyGravity()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            vel.y -= marioJumpGravity * Time.deltaTime;
+        }
+
+        else
+        {
+            vel.y -= normalGravity * Time.deltaTime;
+        }
+    }
 }
