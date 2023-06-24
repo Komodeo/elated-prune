@@ -13,6 +13,9 @@ public class PlumController : MonoBehaviour
     public bool marioJump = false;
     public float normalGravity;
     public float marioJumpGravity;
+    public float shrunkScale;
+    public float inflatedScale;
+    public bool released = false;
     private Vector3 vel;
     public Rigidbody rb;
     public Transform global;
@@ -37,7 +40,6 @@ public class PlumController : MonoBehaviour
         ApplyGravity();
 
         rb.velocity = vel;
-        rb.transform.position = new Vector3(rb.transform.position.x, rb.transform.position.y, -19);
     }
 
     private void Controller()
@@ -46,23 +48,48 @@ public class PlumController : MonoBehaviour
         {
             readyToJump = false;
 
-            Jump();
+            jump();
+        }
+
+        else if (Input.GetKeyUp(KeyCode.Space) && !autoJump)
+        {
+            released = true;
         }
 
         else if (Input.GetKeyDown(KeyCode.Space) && !autoJump && readyToJump && onGround)
         {
             readyToJump = false;
 
-            Jump();
+            jump();
         }
 
         else if (inWater)
         {
             print("Game Over");
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Shrink();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            Normalize();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Inflate();
+        }
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            Normalize();
+        }
     }
 
-    private void Jump()
+    private void jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
@@ -77,7 +104,11 @@ public class PlumController : MonoBehaviour
             if (contact.normal.y > Mathf.Sin(slopeLimit * (Mathf.PI / 180f) + Mathf.PI / 2f))
             {
                 onGround = true;
-                Reset();
+                if (autoJump || released)
+                {
+                    Reset();
+                }
+                released = false;
                 return;
             }
         }
@@ -99,5 +130,20 @@ public class PlumController : MonoBehaviour
         {
             vel.y -= normalGravity * Time.deltaTime;
         }
+    }
+
+    private void Shrink()
+    {
+        transform.localScale = new Vector3(shrunkScale, shrunkScale, shrunkScale);
+    }
+
+    private void Inflate()
+    {
+        transform.localScale = new Vector3(inflatedScale, inflatedScale, inflatedScale);
+    }
+
+    private void Normalize()
+    {
+        transform.localScale = new Vector3(1, 1, 1);
     }
 }
