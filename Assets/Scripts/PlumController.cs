@@ -36,7 +36,6 @@ public class PlumController : MonoBehaviour
     void Update()
     {
         Controller();
-        SpeedControl();
         UI();
     }
 
@@ -142,25 +141,6 @@ public class PlumController : MonoBehaviour
         {
             vel.y -= normalGravity * Time.deltaTime;
         }
-    }
-
-    private void SpeedControl()
-    {
-        if (vel.x > XSpeedLimit)
-        {
-            vel.x = XSpeedLimit;
-        }
-
-        else if (vel.y > YSpeedLimit)
-        {
-            vel.x = YSpeedLimit;
-        }
-
-        else if (vel.y < -YSpeedLimit)
-        {
-            vel.x = -YSpeedLimit;
-        }
-
     }
 
     private void Shrink()
