@@ -267,7 +267,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0c99c0afadf1b814281a0eb787b4e39f, type: 2}
+  - {fileID: 2100000, guid: 19daeccbc664d8141990dd03570ee008, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -872,6 +872,9 @@ MonoBehaviour:
   marioJump: 0
   normalGravity: 9
   marioJumpGravity: 5
+  shrunkScale: 0
+  inflatedScale: 0
+  released: 0
   rb: {fileID: 1954233184}
   global: {fileID: 1378463665}
 --- !u!54 &1954233184
