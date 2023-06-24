@@ -17,8 +17,6 @@ public class PlumController : MonoBehaviour
     public float shrunkScale;
     public float inflatedScale;
     public bool released = false;
-    public float XSpeedLimit;
-    public float YSpeedLimit;
     private Vector3 vel;
     public Rigidbody rb;
     public Transform global;
